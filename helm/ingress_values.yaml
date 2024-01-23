@@ -8,8 +8,5 @@ controller:
   nodeSelector:
     kubernetes.io/os: linux
   service:
-    annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     enabled: true
     type: LoadBalancer
-    externalTrafficPolicy: Local

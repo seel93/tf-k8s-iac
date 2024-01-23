@@ -40,3 +40,31 @@ resource "azurerm_role_assignment" "policy" {
   scope                            = azurerm_container_registry.acr.id
   skip_service_principal_aad_check = true
 }
+
+
+resource "azurerm_kubernetes_cluster_extension" "cluster_extension" {
+  name           = "example-ext"
+  cluster_id     = azurerm_kubernetes_cluster.aks_cluster.id
+  extension_type = "microsoft.flux"
+}
+
+resource "azurerm_kubernetes_flux_configuration" "flux_conf" {
+  name       = "example-fc"
+  cluster_id = azurerm_kubernetes_cluster.aks_cluster.id
+  namespace  = "flux"
+
+  git_repository {
+    url             = "https://github.com/seel93/tf-k8s-iac"
+    reference_type  = "branch"
+    reference_value = "main"
+  }
+
+  kustomizations {
+    name = "kustomization-1"
+    path = "/manifests"
+  }
+
+  depends_on = [
+    azurerm_kubernetes_cluster_extension.cluster_extension
+  ]
+}

@@ -23,23 +23,4 @@ resource "helm_release" "helm_ingress" {
   ]
 }
 
-resource "helm_release" "minio" {
-  name       = "minio"
-  repository = "https://helm.min.io/"
-  chart      = "minio"
-  version    = "8.0.10"  # Use the appropriate version
-  namespace = "storage"
-  create_namespace = true
 
-  set {
-    name  = "accessKey"
-    value = "YOURACCESSKEY"
-  }
-
-  set {
-    name  = "secretKey"
-    value = "YOURSECRETKEY"
-  }
-
-  # Additional configuration can be added here
-}
