@@ -1,0 +1,5 @@
+architecture: replication
+secondary:
+  replicaCount: 2
+metrics:
+   enabled: true

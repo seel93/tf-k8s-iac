@@ -1,0 +1,15 @@
+controller:
+  metrics:
+    enabled: true
+  healthCheckPath: "/healthz"
+  replicaCount: 2
+  nginxDebug: true
+  loglevel: 3
+  nodeSelector:
+    kubernetes.io/os: linux
+  service:
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    enabled: true
+    type: LoadBalancer
+    externalTrafficPolicy: Local
