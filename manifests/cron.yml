@@ -4,16 +4,16 @@ metadata:
   name: busybox-cronjob
   namespace: flux
 spec:
-  schedule: "*/5 * * * *"  # This schedule runs the job every 5 minutes
+  schedule: '*/5 * * * *'
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: busybox
-            image: busybox
-            args:
-            - /bin/sh
-            - -c
-            - date; echo Hello from the Kubernetes cluster
+            - name: busybox
+              image: busybox
+              args:
+                - /bin/sh
+                - '-c'
+                - date; echo Hello from the Kubernetes cluster!!!!
           restartPolicy: OnFailure
